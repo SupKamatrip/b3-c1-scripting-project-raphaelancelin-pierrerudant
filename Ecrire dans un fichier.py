@@ -1,14 +1,22 @@
 import csv
-
-s = open(r"conso-annuelles_original.csv")
-f = open(r"conso-annuelles_v1.csv")
+f = open(r"conso-annuelles_original.csv")
+s = open("conso-annuelles_v1.csv",'w')
 myReader = csv.reader(f, delimiter=';')
 myWriter = csv.writer(s, delimiter=';')
 
 for row in myReader:
-    print(str.strip(row[0])) # str.strip retire les espaces
-    print(str.strip(row[2]) + str.strip(row[3])) # additionne les colonnes 2 et 3
-    print(str.strip(row[4])) #
+
+    for col in row :
+        #print(col)
+        if col=='': #
+            break
+    if col=='':
+        continue # on continue à lire les colonnes/lignes
+    if row[0] != 'Appareil suivi':
+         row[1]=float(row[2])+float(row[3])
+    print(row)
+
+
 
 
 #with open("conso-annuelles_original.csv",'r') as file:
