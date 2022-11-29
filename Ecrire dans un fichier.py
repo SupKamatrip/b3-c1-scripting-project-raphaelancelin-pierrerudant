@@ -14,7 +14,7 @@ for row in myReader:
         continue # on continue à lire les colonnes/lignes
     if row[0] != 'Appareil suivi':   # additionner les deux colonnes et les remplacer par la 1
 
-         row[1]=float(row[2])+float(row[3]) #on ne peut faire de calculs dans python avec une virgule
+        row[1]=float(row[2].replace(',', '.')) + float(row[3].replace(',', '.')) #on ne peut faire de calculs dans python avec une virgule
     print(row)
 
 
