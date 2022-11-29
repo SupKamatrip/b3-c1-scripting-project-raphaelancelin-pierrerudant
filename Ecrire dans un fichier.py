@@ -6,14 +6,14 @@ myWriter = csv.writer(s, delimiter=';')
 
 for row in myReader:
 
-    for col in row :
+    for col in row:
         #print(col)
         if col=='': #
             break
     if col=='':
         continue # on continue à lire les colonnes/lignes
-    if row[0] != 'Appareil suivi':
-         row[1]=float(row[2])+float(row[3])
+    if row[0] != 'Appareil suivi':   # additionner les deux colonnes et les remplacer par la 1
+         row[1]=float(row[2])+float(row[3]) #on ne peut faire de calculs dans python avec une virgule
     print(row)
 
 
