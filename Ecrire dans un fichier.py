@@ -7,22 +7,19 @@ myWriter = csv.writer(s, delimiter=';')
 for row in myReader:
 
     for col in row:
-        #print(col)
-        if col=='': #
+        if col == '':
             break
-    if col=='':
-        continue # on continue à lire les colonnes/lignes
-    if row[0] != 'Appareil suivi':   # additionner les deux colonnes et les remplacer par la 1
+    if col == '':
+        continue  # on continue à lire les colonnes/lignes
 
-        row[1]=float(row[2].replace(',', '.')) + float(row[3].replace(',', '.')) #on ne peut faire de calculs dans python avec une virgule
-    print(row)
+    if row[0] != 'Appareil suivi':  # additionner les deux colonnes et les remplacer par la 1
+        row[1] = float(row[2].replace(',', '.')) + float(
+            row[3].replace(',', '.'))  # on ne peut faire de calculs dans python avec une virgule
+    writable = row[0], row[1]
+    myWriter.writerow(writable) #on ecris les deux premières colonnes
 
 
 
-
-#with open("conso-annuelles_original.csv",'r') as file:
-#    data = file
-#file_csv = 'Data2.csv'
 #csv_file = open('conso-annuelles_original.csv', 'r')
 #with open('conso-annuelles_v1.csv', 'a') as writable:
  #   writer = csv.writer(writable)
