@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\conso_annuelles_v2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

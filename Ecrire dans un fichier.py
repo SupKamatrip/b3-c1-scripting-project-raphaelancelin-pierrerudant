@@ -12,11 +12,11 @@ for row in myReader:
     if col == '':
         continue  # on continue à lire les colonnes/lignes
 
-    if row[0] != 'Appareil suivi':  # additionner les deux colonnes et les remplacer par la 1
+    if row[0] != 'Appareil suivi':                                                          # additionner les deux colonnes et les remplacer par la 1
         row[1] = float(row[2].replace(',', '.')) + float(
             row[3].replace(',', '.'))  # on ne peut faire de calculs dans python avec une virgule
-    writable = row[0], row[1]
-    myWriter.writerow(writable) #on ecris les deux premières colonnes
+    writable = row[1], row[4]
+    myWriter.writerow(writable) #on ecris la colonne id logement et type
 
 
 
