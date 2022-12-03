@@ -26,3 +26,16 @@ for row in myReader:
   #  for row in csv_file:
    #     writer.writerow(str.strip(row[0]))
 
+ if row[0] != 'Appareil suivi':
+                if row[2] == '-':
+                    AN2 = row[2].replace('-', '0')
+                else:
+                    AN1 = row[2]
+                print(row)
+
+                if row[3] == '-':
+                    AN2 = row[3].replace('-', '0')
+                else:
+                    AN2 = row[3]
+                consototal = float(AN1.replace(',', '.')) + float(AN2.replace(',', '.'))
+                writable = row[0], consototal, row[4]
