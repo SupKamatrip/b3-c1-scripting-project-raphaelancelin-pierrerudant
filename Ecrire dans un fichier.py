@@ -1,41 +1,36 @@
 import csv
-f = open(r"conso-annuelles_original.csv")
-s = open("conso-annuelles_v1.csv",'w')
-myReader = csv.reader(f, delimiter=';')
-myWriter = csv.writer(s, delimiter=';')
+data = [] #liste vide
+inputdata = "conso-annuelles_original.csv"
+exitdata = open("conso-clean.csv","w")
+with open(inputdata,'r') as csvfile:
+    myReader = csv.reader(csvfile, delimiter=';')
+    for row in myReader:
+        if row[0] != '' and row[1] != '' and row[2] != '' and row[3] != '' and row[4] != '':
+            data.append([row[0],row[1],row[2],row[3],row[4]])
 
-for row in myReader:
+for row in data:
+    del row[1]
 
-    for col in row:
-        if col == '':
-            break
-    if col == '':
-        continue  # on continue à lire les colonnes/lignes
+data.pop(0) # permet de convertir sans l'en tete
 
-    if row[0] != 'Appareil suivi':                                                          # additionner les deux colonnes et les remplacer par la 1
-        row[1] = float(row[2].replace(',', '.')) + float(
-            row[3].replace(',', '.'))  # on ne peut faire de calculs dans python avec une virgule
-    writable = row[1], row[4]
-    myWriter.writerow(writable) #on ecris la colonne id logement et type
+for row in data:
+    row[1] = row[1].replace(',', '.') # on remplace
+    row[2] = row[2].replace(',', '.')
 
+for row in data:
+    if row != '-':
+        row.replace('-','0')
 
+for row in data:
+    row[2] = float(row[2]) + float (row[1])
+    del row[1]
+for row in data:
+    row[1] = round(float(row[1]), 2)
 
-#csv_file = open('conso-annuelles_original.csv', 'r')
-#with open('conso-annuelles_v1.csv', 'a') as writable:
- #   writer = csv.writer(writable)
-  #  for row in csv_file:
-   #     writer.writerow(str.strip(row[0]))
+data.sort(key=lambda x: (x[2], x[1]), reverse=True)
+data.insert(0, ['Appareil suivi', 'CT Annuelle', 'Type'])
 
- if row[0] != 'Appareil suivi':
-                if row[2] == '-':
-                    AN2 = row[2].replace('-', '0')
-                else:
-                    AN1 = row[2]
-                print(row)
-
-                if row[3] == '-':
-                    AN2 = row[3].replace('-', '0')
-                else:
-                    AN2 = row[3]
-                consototal = float(AN1.replace(',', '.')) + float(AN2.replace(',', '.'))
-                writable = row[0], consototal, row[4]
+with open('conso-clean.csv', 'w', newline='') as csvfile: # ouverture du fichier de sortie en mode write
+    myWriter = csv.writer(csvfile, delimiter=';') # création d'un objet writer pour écrire dans le fichier de sortie
+    myWriter.writerows(data) # écriture des lignes dans le fichier de sortie
+print(data)
